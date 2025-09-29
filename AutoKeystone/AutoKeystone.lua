@@ -1,6 +1,5 @@
 local ReagentClass, KeystoneClass = Enum.ItemClass.Reagent, Enum.ItemReagentSubclass.Keystone
-local GetContainerItemID, GetContainerNumSlots, GetItemInfo = C_Container.GetContainerItemID, C_Container.GetContainerNumSlots, C_Item.GetItemInfo
-local select = select
+local GetContainerItemID, GetContainerNumSlots, GetItemInfoInstant = C_Container.GetContainerItemID, C_Container.GetContainerNumSlots, C_Item.GetItemInfoInstant
 local NUM_BAG_FRAMES = NUM_BAG_FRAMES or 4
 
 local SlotKeystone = function()
@@ -9,7 +8,7 @@ local SlotKeystone = function()
 			local ID = GetContainerItemID(bag, slot)
 
 			if ID then
-				local Class, SubClass = select(12, GetItemInfo(ID))
+				local _, _, _, _, _, _, Class, SubClass = GetItemInfoInstant(ID)
 
 				if Class == ReagentClass and SubClass == KeystoneClass then
 					C_Container.PickupContainerItem(bag, slot)
